@@ -1,8 +1,8 @@
 {
   "id": "vscode",
-  "name": "Communication Bridge",
-  "description": "Registers a generic outbound HTTP messaging channel for OpenClaw.",
-  "version": "0.1.0",
+  "name": "VS Code Channel",
+  "description": "Registers the VS Code channel plugin for OpenClaw with outbound HTTP message delivery.",
+  "version": "1.0.0",
   "channels": ["vscode"],
   "configSchema": {
     "type": "object",

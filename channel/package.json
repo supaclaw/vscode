@@ -1,7 +1,7 @@
 {
-  "name": "@supaclow/openclaw-comm-bridge",
-  "version": "0.1.0",
-  "description": "Generic outbound HTTP communication channel plugin for OpenClaw.",
+  "name": "@supaclow/openclaw-vscode",
+  "version": "1.0.0",
+  "description": "VS Code channel plugin for OpenClaw that delivers outbound messages over HTTP.",
   "license": "MIT",
   "main": "index.js",
   "files": [
@@ -34,19 +34,19 @@
     ],
     "channel": {
       "id": "vscode",
-      "label": "Communication Bridge",
-      "selectionLabel": "Communication Bridge (HTTP API)",
+      "label": "VS Code Channel",
+      "selectionLabel": "VS Code Channel (HTTP API)",
       "docsPath": "/channels/vscode",
       "docsLabel": "vscode",
-      "blurb": "A generic outbound HTTP channel plugin for custom communication providers.",
+      "blurb": "Connect OpenClaw to the VS Code channel over HTTP for outbound message delivery.",
       "order": 90,
       "aliases": [
-        "commbridge",
+        "vscode",
         "http-bridge"
       ]
     },
     "install": {
-      "npmSpec": "@supaclow/openclaw-comm-bridge",
+      "npmSpec": "@supaclow/openclaw-vscode",
       "defaultChoice": "npm"
     }
   }
