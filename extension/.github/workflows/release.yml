@@ -1,0 +1,90 @@
+name: Release
+
+on:
+  release:
+    types:
+      - created
+
+permissions:
+  contents: write
+
+jobs:
+  build-vscode-extension:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Read extension metadata
+        id: extension
+        working-directory: ./extension
+        shell: bash
+        run: |
+          node <<'EOF' >> "$GITHUB_OUTPUT"
+          const fs = require("node:fs");
+
+          const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+
+          if (!pkg.name || !pkg.version) {
+            throw new Error("package.json must include name and version");
+          }
+
+          process.stdout.write(`name=${pkg.name}\n`);
+          process.stdout.write(`version=${pkg.version}\n`);
+          process.stdout.write(`vsix=${pkg.name}-${pkg.version}.vsix\n`);
+          EOF
+
+      - name: Validate release tag
+        shell: bash
+        run: |
+          release_tag="${{ github.event.release.tag_name }}"
+          release_version="${release_tag#v}"
+          package_version="${{ steps.extension.outputs.version }}"
+
+          if [[ "$release_version" != "$package_version" ]]; then
+            echo "error: release tag $release_tag does not match extension version $package_version" >&2
+            exit 1
+          fi
+
+      - name: Run extension checks
+        working-directory: ./extension
+        run: bash ./test.sh
+
+      - name: Package extension
+        working-directory: ./extension
+        run: |
+          mkdir -p dist
+          bash ./build.sh --out "./dist/${{ steps.extension.outputs.vsix }}"
+
+      - name: Verify package
+        run: ls -lh "./extension/dist/${{ steps.extension.outputs.vsix }}"
+
+      - name: Upload extension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vscode-extension
+          path: ./extension/dist/${{ steps.extension.outputs.vsix }}
+
+      - name: Attach extension to GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./extension/dist/${{ steps.extension.outputs.vsix }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.SUPACLAW_TOKEN }}
+
+      - name: Publish to VS Code Marketplace
+        if: ${{ secrets.VSCODE_MARKETPLACE_TOKEN != '' }}
+        continue-on-error: true
+        working-directory: ./extension
+        env:
+          VSCE_PAT: ${{ secrets.VSCODE_MARKETPLACE_TOKEN }}
+        run: |
+          npx --yes @vscode/vsce publish \
+            --packagePath "./dist/${{ steps.extension.outputs.vsix }}" \
+            -p "$VSCE_PAT"
