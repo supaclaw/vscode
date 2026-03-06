@@ -1,0 +1,105 @@
+{
+  "name": "openclaw-vscode-channel",
+  "displayName": "OpenClaw VS Code Channel",
+  "description": "VS Code extension that hosts a chat panel and local receiver for an OpenClaw communication channel.",
+  "version": "0.1.0",
+  "publisher": "supaclow",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Chat",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "openclawVscode.openChat",
+        "title": "OpenClaw: Open VS Code Chat"
+      },
+      {
+        "command": "openclawVscode.startReceiver",
+        "title": "OpenClaw: Start VS Code Channel Receiver"
+      },
+      {
+        "command": "openclawVscode.stopReceiver",
+        "title": "OpenClaw: Stop VS Code Channel Receiver"
+      },
+      {
+        "command": "openclawVscode.copyChannelConfig",
+        "title": "OpenClaw: Copy VS Code Channel Config"
+      }
+    ],
+    "configuration": {
+      "title": "OpenClaw VS Code Channel",
+      "properties": {
+        "openclawVscode.autoStartReceiver": {
+          "type": "boolean",
+          "default": true,
+          "description": "Start the local receiver when VS Code finishes starting."
+        },
+        "openclawVscode.receiverHost": {
+          "type": "string",
+          "default": "127.0.0.1",
+          "description": "Host for the local HTTP receiver used by the OpenClaw channel plugin."
+        },
+        "openclawVscode.receiverPort": {
+          "type": "number",
+          "default": 8765,
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Port for the local HTTP receiver used by the OpenClaw channel plugin."
+        },
+        "openclawVscode.receiverAuthToken": {
+          "type": "string",
+          "default": "",
+          "description": "Optional bearer token required from OpenClaw when posting inbound channel messages to VS Code.",
+          "scope": "machine-overridable"
+        },
+        "openclawVscode.gatewayMessageUrl": {
+          "type": "string",
+          "default": "",
+          "description": "HTTP endpoint that receives user messages from the VS Code chat panel and forwards them into OpenClaw."
+        },
+        "openclawVscode.gatewayAuthToken": {
+          "type": "string",
+          "default": "",
+          "description": "Optional bearer token used when the extension sends a chat message to the OpenClaw HTTP endpoint.",
+          "scope": "machine-overridable"
+        },
+        "openclawVscode.channelId": {
+          "type": "string",
+          "default": "comm-bridge",
+          "description": "Channel identifier forwarded with outbound chat messages."
+        },
+        "openclawVscode.accountId": {
+          "type": "string",
+          "default": "default",
+          "description": "Account identifier forwarded with outbound chat messages."
+        },
+        "openclawVscode.senderId": {
+          "type": "string",
+          "default": "vscode-user",
+          "description": "Sender identifier attached to messages sent from the VS Code chat panel."
+        },
+        "openclawVscode.conversationId": {
+          "type": "string",
+          "default": "vscode",
+          "description": "Conversation identifier attached to messages sent from the VS Code chat panel."
+        },
+        "openclawVscode.maxMessages": {
+          "type": "number",
+          "default": 200,
+          "minimum": 20,
+          "maximum": 1000,
+          "description": "Maximum number of messages stored in the local chat history."
+        }
+      }
+    }
+  }
+}
