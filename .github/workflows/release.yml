@@ -90,3 +90,62 @@ jobs:
           npx --yes @vscode/vsce publish \
             --packagePath "./dist/${{ steps.extension.outputs.vsix }}" \
             -p "$VSCE_PAT"
+
+  build-vscode-channel-plugin:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Read channel metadata
+        id: channel
+        working-directory: ./channel
+        shell: bash
+        run: |
+          node <<'EOF' >> "$GITHUB_OUTPUT"
+          const fs = require("node:fs");
+
+          const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+
+          if (!pkg.name || !pkg.version) {
+            throw new Error("package.json must include name and version");
+          }
+
+          const tarballName = `${pkg.name.replace(/^@/, "").replace(/\//g, "-")}-${pkg.version}.tgz`;
+
+          process.stdout.write(`name=${pkg.name}\n`);
+          process.stdout.write(`version=${pkg.version}\n`);
+          process.stdout.write(`tarball=${tarballName}\n`);
+          EOF
+
+      - name: Run channel checks
+        working-directory: ./channel
+        run: bash ./test.sh
+
+      - name: Package channel plugin
+        working-directory: ./channel
+        run: |
+          mkdir -p dist
+          bash ./build.sh --pack-destination ./dist
+
+      - name: Verify package
+        run: ls -lh "./channel/dist/${{ steps.channel.outputs.tarball }}"
+
+      - name: Upload channel artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vscode-channel-plugin
+          path: ./channel/dist/${{ steps.channel.outputs.tarball }}
+
+      - name: Attach channel plugin to GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./channel/dist/${{ steps.channel.outputs.tarball }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.SUPACLAW_TOKEN }}
