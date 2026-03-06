@@ -34,7 +34,7 @@ module.exports = function register(api) {
   });
 
   api.registerHttpRoute({
-    path: "/plugins/comm-bridge/health",
+    path: "/plugins/vscode/health",
     auth: "plugin",
     match: "exact",
     handler: async (_req, res) => {

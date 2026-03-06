@@ -1,4 +1,4 @@
-export const CHANNEL_ID = "comm-bridge";
+export const CHANNEL_ID = "vscode";
 
 export type StringMap = Record<string, string>;
 

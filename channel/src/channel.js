@@ -71,7 +71,7 @@ function createChannelPlugin(api) {
       id: CHANNEL_ID,
       label: "Communication Bridge",
       selectionLabel: "Communication Bridge (HTTP API)",
-      docsPath: "/channels/comm-bridge",
+      docsPath: "/channels/vscode",
       blurb: "A generic outbound HTTP bridge for custom communication providers.",
       aliases: ["commbridge", "http-bridge"],
     },
@@ -110,10 +110,10 @@ function createChannelPlugin(api) {
     },
     gateway: {
       async start() {
-        api.logger?.info?.("comm-bridge gateway hooks ready");
+        api.logger?.info?.("vscode gateway hooks ready");
       },
       async stop() {
-        api.logger?.info?.("comm-bridge gateway hooks stopped");
+        api.logger?.info?.("vscode gateway hooks stopped");
       },
     },
   };

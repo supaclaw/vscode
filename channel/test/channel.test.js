@@ -7,7 +7,7 @@ const { inspectAccount, listAccountIds, resolveAccount } = require("../src/confi
 test("lists configured accounts", () => {
   const cfg = {
     channels: {
-      "comm-bridge": {
+      vscode: {
         accounts: {
           default: {
             enabled: true,
@@ -28,7 +28,7 @@ test("lists configured accounts", () => {
 test("resolves the default account", () => {
   const cfg = {
     channels: {
-      "comm-bridge": {
+      vscode: {
         accounts: {
           default: {
             outboundUrl: "https://bridge.example.com/messages",
@@ -47,7 +47,7 @@ test("resolves the default account", () => {
 test("inspects availability fields without exposing secrets", () => {
   const cfg = {
     channels: {
-      "comm-bridge": {
+      vscode: {
         accounts: {
           default: {
             enabled: true,
@@ -87,7 +87,7 @@ test("builds the expected outbound payload", () => {
 
   assert.deepEqual(payload, {
     source: "openclaw",
-    channel: "comm-bridge",
+    channel: "vscode",
     accountId: "default",
     recipient: "room-123",
     text: "hello",
@@ -118,7 +118,7 @@ test("sends text to the configured outbound URL", async (t) => {
   const result = await sendOutboundText({
     cfg: {
       channels: {
-        "comm-bridge": {
+        vscode: {
           accounts: {
             default: {
               outboundUrl: "https://bridge.example.com/messages",
@@ -143,7 +143,7 @@ test("throws when outboundUrl is missing", async () => {
     sendOutboundText({
       cfg: {
         channels: {
-          "comm-bridge": {
+          vscode: {
             accounts: {
               default: {},
             },
@@ -152,6 +152,6 @@ test("throws when outboundUrl is missing", async () => {
       },
       text: "hello",
     }),
-    /missing channels\.comm-bridge\.accounts\.default\.outboundUrl/,
+    /missing channels\.vscode\.accounts\.default\.outboundUrl/,
   );
 });

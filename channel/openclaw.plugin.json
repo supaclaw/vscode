@@ -1,9 +1,9 @@
 {
-  "id": "comm-bridge",
+  "id": "vscode",
   "name": "Communication Bridge",
   "description": "Registers a generic outbound HTTP messaging channel for OpenClaw.",
   "version": "0.1.0",
-  "channels": ["comm-bridge"],
+  "channels": ["vscode"],
   "configSchema": {
     "type": "object",
     "additionalProperties": false,

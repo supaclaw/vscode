@@ -1,4 +1,4 @@
-const CHANNEL_ID = "comm-bridge";
+const CHANNEL_ID = "vscode";
 
 function getAccounts(cfg) {
   return cfg?.channels?.[CHANNEL_ID]?.accounts ?? {};

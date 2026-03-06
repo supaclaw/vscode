@@ -1,18 +1,18 @@
 # OpenClaw Communication Bridge Plugin
 
-This repository contains a standalone OpenClaw communication channel plugin that registers a generic HTTP-backed channel named `comm-bridge`.
+This repository contains a standalone OpenClaw communication channel plugin that registers a generic HTTP-backed channel named `vscode`.
 
 It is designed as a clean starting point for custom messaging integrations when you do not yet have an official OpenClaw channel plugin for your provider.
 
 ## What it does
 
-- Registers a channel under `channels.comm-bridge`
-- Supports multi-account configuration via `channels.comm-bridge.accounts.<accountId>`
+- Registers a channel under `channels.vscode`
+- Supports multi-account configuration via `channels.vscode.accounts.<accountId>`
 - Implements read-only account inspection for `openclaw status` style commands
 - Sends outbound text messages to an HTTP API you control
-- Exposes a simple gateway RPC status method: `comm-bridge.status`
+- Exposes a simple gateway RPC status method: `vscode.status`
 - Adds a slash command: `/commbridge_status`
-- Exposes a lightweight plugin HTTP health route at `/plugins/comm-bridge/health`
+- Exposes a lightweight plugin HTTP health route at `/plugins/vscode/health`
 
 ## Project structure
 
@@ -55,13 +55,13 @@ export default {
       paths: ["/absolute/path/to/this/repo"]
     },
     entries: {
-      "comm-bridge": {
+      "vscode": {
         enabled: true
       }
     }
   },
   channels: {
-    "comm-bridge": {
+    "vscode": {
       accounts: {
         default: {
           enabled: true,
@@ -89,7 +89,7 @@ The plugin sends a JSON body like this to `outboundUrl`:
 ```json
 {
   "source": "openclaw",
-  "channel": "comm-bridge",
+  "channel": "vscode",
   "accountId": "default",
   "recipient": "room-123",
   "text": "hello",

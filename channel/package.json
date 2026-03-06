@@ -33,11 +33,11 @@
       "./index.js"
     ],
     "channel": {
-      "id": "comm-bridge",
+      "id": "vscode",
       "label": "Communication Bridge",
       "selectionLabel": "Communication Bridge (HTTP API)",
-      "docsPath": "/channels/comm-bridge",
-      "docsLabel": "comm-bridge",
+      "docsPath": "/channels/vscode",
+      "docsLabel": "vscode",
       "blurb": "A generic outbound HTTP channel plugin for custom communication providers.",
       "order": 90,
       "aliases": [

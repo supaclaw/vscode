@@ -2,7 +2,7 @@
 
 This workspace contains two connected projects for using OpenClaw through VS Code:
 
-- `channel/`: an OpenClaw communication channel plugin with id `comm-bridge`
+- `channel/`: an OpenClaw communication channel plugin with id `vscode`
 - `extension/`: a VS Code extension that provides a local chat UI and HTTP receiver
 
 Together they let you use VS Code as a chat surface while OpenClaw routes replies through the configured channel bridge.
@@ -14,7 +14,7 @@ Together they let you use VS Code as a chat surface while OpenClaw routes replie
 Location: `channel/`
 
 Purpose:
-- Registers the `comm-bridge` OpenClaw channel
+- Registers the `vscode` OpenClaw channel
 - Sends outbound text to a configurable HTTP endpoint
 - Exposes status helpers and a health route for plugin diagnostics
 

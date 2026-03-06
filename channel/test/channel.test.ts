@@ -6,7 +6,7 @@ import { inspectAccount, listAccountIds, resolveAccount } from "../src/config";
 describe("config helpers", () => {
   const cfg = {
     channels: {
-      "comm-bridge": {
+      vscode: {
         accounts: {
           default: {
             enabled: true,
@@ -64,7 +64,7 @@ describe("outbound sender", () => {
 
     expect(payload).toEqual({
       source: "openclaw",
-      channel: "comm-bridge",
+      channel: "vscode",
       accountId: "default",
       recipient: "room-123",
       text: "hello",
@@ -86,7 +86,7 @@ describe("outbound sender", () => {
       sendOutboundText({
         cfg: {
           channels: {
-            "comm-bridge": {
+            vscode: {
               accounts: {
                 default: {
                   outboundUrl: "https://bridge.example.com/messages",
@@ -122,7 +122,7 @@ describe("outbound sender", () => {
       sendOutboundText({
         cfg: {
           channels: {
-            "comm-bridge": {
+            vscode: {
               accounts: {
                 default: {},
               },
@@ -131,6 +131,6 @@ describe("outbound sender", () => {
         },
         text: "hello",
       }),
-    ).rejects.toThrow("missing channels.comm-bridge.accounts.default.outboundUrl");
+    ).rejects.toThrow("missing channels.vscode.accounts.default.outboundUrl");
   });
 });

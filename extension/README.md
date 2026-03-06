@@ -14,7 +14,7 @@ It provides two pieces:
 - Accept inbound channel messages on `POST /messages`
 - Return receiver health on `GET /health`
 - Forward user messages to a configurable OpenClaw HTTP endpoint
-- Copy a matching `channels.comm-bridge.accounts.default` config snippet for the channel plugin
+- Copy a matching `channels.vscode.accounts.default` config snippet for the channel plugin
 
 ## Extension commands
 
@@ -51,13 +51,13 @@ export default {
 			paths: ["/absolute/path/to/workspace/channel"]
 		},
 		entries: {
-			"comm-bridge": {
+			"vscode": {
 				enabled: true
 			}
 		}
 	},
 	channels: {
-		"comm-bridge": {
+		"vscode": {
 			accounts: {
 				default: {
 					enabled: true,
@@ -79,8 +79,8 @@ When you send a message from the webview, the extension posts JSON to `openclawV
 
 ```json
 {
-	"channel": "comm-bridge",
-	"channelId": "comm-bridge",
+	"channel": "vscode",
+	"channelId": "vscode",
 	"accountId": "default",
 	"senderId": "vscode-user",
 	"conversationId": "vscode",
