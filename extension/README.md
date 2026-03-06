@@ -45,29 +45,29 @@ Example OpenClaw config:
 
 ```ts
 export default {
-	plugins: {
-		enabled: true,
-		load: {
-			paths: ["/absolute/path/to/workspace/channel"]
-		},
-		entries: {
-			"vscode": {
-				enabled: true
-			}
-		}
-	},
-	channels: {
-		"vscode": {
-			accounts: {
-				default: {
-					enabled: true,
-					label: "VS Code",
-					outboundUrl: "http://127.0.0.1:8765/messages",
-					authToken: "optional-shared-secret"
-				}
-			}
-		}
-	}
+  plugins: {
+    enabled: true,
+    load: {
+      paths: ["/absolute/path/to/workspace/channel"]
+    },
+    entries: {
+      "vscode": {
+        enabled: true
+      }
+    }
+  },
+  channels: {
+    "vscode": {
+      accounts: {
+        default: {
+          enabled: true,
+            label: "VS Code",
+            outboundUrl: "http://127.0.0.1:8765/messages",
+            authToken: "optional-shared-secret"
+        }
+      }
+    }
+  }
 };
 ```
 
@@ -79,16 +79,16 @@ When you send a message from the webview, the extension posts JSON to `openclawV
 
 ```json
 {
-	"channel": "vscode",
-	"channelId": "vscode",
-	"accountId": "default",
-	"senderId": "vscode-user",
-	"conversationId": "vscode",
-	"text": "hello from vscode",
-	"metadata": {
-		"source": "vscode-extension",
-		"sentAt": "2026-03-06T00:00:00.000Z"
-	}
+  "channel": "vscode",
+  "channelId": "vscode",
+  "accountId": "default",
+  "senderId": "vscode-user",
+  "conversationId": "vscode",
+  "text": "hello from vscode",
+  "metadata": {
+    "source": "vscode-extension",
+    "sentAt": "2026-03-06T00:00:00.000Z"
+  }
 }
 ```
 

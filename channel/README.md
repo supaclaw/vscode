@@ -14,21 +14,6 @@ It is designed as a clean starting point for custom messaging integrations when 
 - Adds a slash command: `/commbridge_status`
 - Exposes a lightweight plugin HTTP health route at `/plugins/vscode/health`
 
-## Project structure
-
-```text
-.
-├── index.js
-├── openclaw.plugin.json
-├── package.json
-├── src/
-│   ├── config.js
-│   ├── channel.js
-│   └── index.js
-└── test/
-  └── channel.test.js
-```
-
 ## Build
 
 ```bash
