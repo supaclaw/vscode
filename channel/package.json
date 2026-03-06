@@ -1,0 +1,53 @@
+{
+  "name": "@supaclow/openclaw-comm-bridge",
+  "version": "0.1.0",
+  "description": "Generic outbound HTTP communication channel plugin for OpenClaw.",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "src",
+    "openclaw.plugin.json",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node -e \"console.log('No build step required for this plugin.')\"",
+    "test": "node --test"
+  },
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "channel",
+    "communication"
+  ],
+  "peerDependencies": {
+    "openclaw": ">=2026.1.0"
+  },
+  "peerDependenciesMeta": {
+    "openclaw": {
+      "optional": true
+    }
+  },
+  "openclaw": {
+    "extensions": [
+      "./index.js"
+    ],
+    "channel": {
+      "id": "comm-bridge",
+      "label": "Communication Bridge",
+      "selectionLabel": "Communication Bridge (HTTP API)",
+      "docsPath": "/channels/comm-bridge",
+      "docsLabel": "comm-bridge",
+      "blurb": "A generic outbound HTTP channel plugin for custom communication providers.",
+      "order": 90,
+      "aliases": [
+        "commbridge",
+        "http-bridge"
+      ]
+    },
+    "install": {
+      "npmSpec": "@supaclow/openclaw-comm-bridge",
+      "defaultChoice": "npm"
+    }
+  }
+}
