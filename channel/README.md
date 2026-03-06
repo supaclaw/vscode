@@ -17,16 +17,25 @@ It is designed as a clean starting point for custom messaging integrations when 
 ## Build
 
 ```bash
-node -e "console.log('No build step required for this plugin.')"
+bash ./build.sh
 ```
 
 OpenClaw can load the JavaScript entrypoint directly, so there is no compile step.
+The Ubuntu build script validates the required plugin files and creates an npm tarball with `npm pack` for distribution or local installation testing.
+
+Requirements:
+
+- `bash`
+- `node` or `nodejs`
+- `npm` or `npmjs`
 
 ## Test
 
 ```bash
-node --test
+bash ./test.sh
 ```
+
+The Ubuntu test script runs the JavaScript test suite directly from this plugin directory and accepts additional `node --test` arguments.
 
 ## Load into OpenClaw
 
