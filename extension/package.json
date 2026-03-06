@@ -2,7 +2,7 @@
   "name": "openclaw-vscode-channel",
   "displayName": "OpenClaw VS Code Channel",
   "description": "VS Code extension that hosts a chat panel and local receiver for an OpenClaw communication channel.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "publisher": "supaclow",
   "license": "MIT",
   "engines": {
