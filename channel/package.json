@@ -1,5 +1,5 @@
 {
-  "name": "@supaclow/openclaw-vscode",
+  "name": "@supaclow/openclaw-vscode-channel",
   "version": "1.0.0",
   "description": "VS Code channel plugin for OpenClaw that delivers outbound messages over HTTP.",
   "license": "MIT",
