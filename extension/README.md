@@ -37,6 +37,28 @@ It provides two pieces:
 - `openclawVscode.conversationId`
 - `openclawVscode.maxMessages`
 
+## Build
+
+```bash
+bash ./build.sh
+```
+
+The Ubuntu build script validates the required extension files and packages the extension as a `.vsix` using `@vscode/vsce`.
+
+Requirements:
+
+- `bash`
+- `node` or `nodejs`
+- `npm` or `npmjs`
+
+## Test
+
+```bash
+bash ./test.sh
+```
+
+The Ubuntu test script performs a syntax check on `extension.js` and validates key manifest fields in `package.json`.
+
 ## Pair it with the OpenClaw channel plugin
 
 The existing plugin in `../channel` already supports outbound delivery to an HTTP endpoint. Configure that plugin to post to the receiver started by this extension.
@@ -96,6 +118,6 @@ If your OpenClaw HTTP entrypoint expects a different payload shape, adapt `exten
 
 ## Notes
 
-- This extension is plain JavaScript and does not require a build step.
+- This extension is plain JavaScript and does not require a compile step before packaging.
 - The receiver is local to the VS Code extension host, so OpenClaw must be able to reach that host and port.
 - The current workspace uses a WSL UNC path, so keeping the extension dependency-free avoids npm lifecycle path issues.
