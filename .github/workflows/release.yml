@@ -11,6 +11,8 @@ permissions:
 jobs:
   build-vscode-extension:
     runs-on: ubuntu-latest
+    env:
+      VSCODE_MARKETPLACE_TOKEN: ${{ secrets.VSCODE_MARKETPLACE_TOKEN }}
 
     steps:
       - name: Check out
@@ -79,11 +81,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.SUPACLAW_TOKEN }}
 
       - name: Publish to VS Code Marketplace
-        if: ${{ secrets.VSCODE_MARKETPLACE_TOKEN != '' }}
+        if: ${{ env.VSCODE_MARKETPLACE_TOKEN != '' }}
         continue-on-error: true
         working-directory: ./extension
         env:
-          VSCE_PAT: ${{ secrets.VSCODE_MARKETPLACE_TOKEN }}
+          VSCE_PAT: ${{ env.VSCODE_MARKETPLACE_TOKEN }}
         run: |
           npx --yes @vscode/vsce publish \
             --packagePath "./dist/${{ steps.extension.outputs.vsix }}" \
